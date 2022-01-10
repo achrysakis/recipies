@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 const Styles = StyleSheet.create({
   screen: {
     flex: 1,
-    justifyConent: 'center',
+    justifyContent: 'center',
     alignItems: 'center'
   }
 });
