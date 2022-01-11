@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import Styles from '../components/Styles';
+import Styles from '../constants/Styles';
 
 const FiltersScreen = props => {
   return (

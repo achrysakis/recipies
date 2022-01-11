@@ -1,12 +1,26 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import Styles from '../components/Styles';
+import { FlatList } from 'react-native';
+import { CATEGORIES } from '../data/categories-data';
+import CategoryGridTile from '../components/CategoryGridTile';
 
 const CategoriesScreen = props => {
+
   return (
-    <View style={Styles.screen}>
-      <Text>The Categories Screen</Text>
-    </View>
+    <FlatList 
+      numColumns={2} 
+      data={CATEGORIES} 
+      renderItem={
+        ({ item }) => (
+          <CategoryGridTile 
+            category={item}
+            onSelect={() => {
+              props.navigation.navigate('CategoryMeals', {
+                category: item
+              })       
+            }}
+          />        
+        )}
+    />
   );
 };
 
