@@ -5,6 +5,7 @@ const Colors = {
   fonts: {
     primary: "#000",
     alternate: "#fff",
+    secondary: "purple",
     bold: "bold"
   },
   backgrounds: {

@@ -1,6 +1,8 @@
+import 'react-native-gesture-handler';
 import React, { useState } from 'react';
 import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import MealsNavigator from './navigation/MealsNavigator';
 
 const fetchFonts = () => {
@@ -9,6 +11,7 @@ const fetchFonts = () => {
     'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf')
   });
 };
+
 
 export default function App() {
   const [fontLoaded, setFontLoaded] = useState(false);
@@ -24,6 +27,8 @@ export default function App() {
   }
 
   return (
-    <MealsNavigator />
+    <SafeAreaProvider>
+      <MealsNavigator />
+    </SafeAreaProvider>
   );
 }

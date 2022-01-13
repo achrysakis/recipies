@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Platform, TouchableNativeFeedback } from 'react-native';
+import { View, Text, TouchableOpacity, Platform, TouchableNativeFeedback, ImageBackground } from 'react-native';
 import Styles from '../constants/Styles';
 
 const CategoryGridTile = props => {
@@ -9,15 +9,20 @@ const CategoryGridTile = props => {
     TouchableComponent = TouchableNativeFeedback;
   }
 
+  const image = { uri: props.category.imageUrl };
+  
   return (
     <View style={Styles.categoryGridItemContainer}>
       <TouchableComponent 
         style={Styles.flex}
         onPress={props.onSelect}
       >
-        <View style={{...Styles.categoryGridItem, ...{backgroundColor: props.category.backgroundColor}}}>
-          <Text style={Styles.categoryGridTitle} numberOfLines={2}>{props.category.title}</Text>
-        </View>
+        <ImageBackground source={image} resizeMode='cover' style={Styles.categoryGridImage}>
+          <View style={Styles.categoryGridItem}>
+            <Text style={Styles.categoryGridTitle} numberOfLines={2}>{props.category.title}</Text>
+          </View>          
+        </ImageBackground>        
+
 
       </TouchableComponent>   
     </View>

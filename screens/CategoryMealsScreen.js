@@ -1,23 +1,21 @@
 import React, { useEffect } from 'react';
 import { FlatList } from 'react-native';
-import { CATEGORIES } from '../data/categories-data';
+
 import { MEALS } from '../data/meals-data';
+import { CATEGORIES } from '../data/categories-data';
 import MealGridTile from '../components/MealGridTile';
 
 
 const CategoryMealScreen = props => {
-  const { category } = props.route.params;
+  const { categoryId } = props.route.params;
+  const category = CATEGORIES.find(category => category.id === categoryId);
   const meals = MEALS.filter(meal => meal.categoryIds.includes(category.id));
 
   useEffect(() => {
     props.navigation.setOptions({ 
       title: category.title,
-      headerStyle: {
-        backgroundColor: category.backgroundColor,
-      },
-      headerTintColor: category.fontColor
     });
-  }, [props.navigation, category])  
+  }, [category])  
 
   return (
     <FlatList 
@@ -30,26 +28,13 @@ const CategoryMealScreen = props => {
             category={category}
             onSelect={() => {
               props.navigation.navigate('MealDetail', {
-                meal: item,
-                category: category
+                mealId: item.id,
+                categoryId: category.id
               })       
             }}
           />        
         )}
     />
-
-
-
-    // <View style={Styles.screen}>
-    //   <Text>The Category Meals Screen</Text>
-    //   <Text>{category.title}</Text>
-    //   <Button title="Go to meal detail" onPress={() => {
-    //     props.navigation.navigate('MealDetail');
-    //   }} />
-    //   <Button title="Go back to categories" onPress={() => {
-    //     props.navigation.goBack();
-    //   }} />       
-    // </View>
   );
 };
 
