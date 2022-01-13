@@ -189,6 +189,7 @@ const Drawer = props => {
           options={{ 
             title: "Filters", ...drawerIcon(props)
           }}
+          test="test"
           name="FiltersStack" 
           component={FiltersStack} 
         />

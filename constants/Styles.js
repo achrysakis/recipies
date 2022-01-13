@@ -6,6 +6,14 @@ const Styles = StyleSheet.create({
     flex: 1,
     alignContent: 'center',
     alignItems: 'center',
+    padding: 10
+  },
+  button: {
+    color: Colors.fonts.primary,
+    backgroundColor: Colors.backgrounds.primary,
+    paddingHorizontal: 30,
+    paddingVertical: 3,
+    borderRadius: 5
   },
   flex: {
     flex: 1,
@@ -30,7 +38,7 @@ const Styles = StyleSheet.create({
     marginBottom: 10,
     borderColor: "#ccc",
     width: "100%",
-    padding: 15,
+    padding: 10,
     borderWidth: 1,
     backgroundColor: "#fafafa",
   },
@@ -42,7 +50,6 @@ const Styles = StyleSheet.create({
   paragraphContainer:{
     marginBottom: 10,
     width: "100%",
-    padding: 15
   },
   paragraph: {
     fontFamily: "open-sans",
@@ -86,10 +93,10 @@ const Styles = StyleSheet.create({
     margin: 5,
     borderRadius: 10,
     elevation: 5,
-    height: 300,
+    height: 250,
     overflow: "hidden",  
     borderColor: "#ccc",
-    borderWidth: 1
+    borderWidth: 1,
   },
   mealGridItem: {
     flex: 1,
@@ -118,23 +125,42 @@ const Styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     backgroundColor: "#fafafa",
-    borderTopColor: "#ccc",
+    borderTopColor: Colors.fonts.secondary,
     borderTopWidth: 1,
-    width: "100%"
+    width: "100%",
+    backgroundColor: "#fff",
+
   },
   mealGridInfo: {
     padding: 10,
     color: Colors.fonts.secondary,
     textTransform: 'capitalize',
     fontFamily: "open-sans",
-    borderRightWidth: 1,
   },
 
 
   mealImage: {
     width: "100%",
     height: 250
+  },
+
+  filterContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 20,
+    width: "100%",
+    maxWidth: 250,
+    alignContent: "center"
+    
+  },
+  filterLabel: {
+    fontFamily: "open-sans",
+  },
+
+  filterSwitch: {
   }
+
 });
 
 export default Styles;
