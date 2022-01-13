@@ -1,7 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { View, Text, Switch, Button, } from 'react-native';
-import { Icon } from 'react-native-elements';
-import { useNavigation } from '@react-navigation/native';
+import { View, Text, Switch } from 'react-native';
 
 import Styles from '../constants/Styles';
 import Colors from '../constants/Colors';

@@ -1,34 +1,19 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { FlatList } from 'react-native';
+import { useSelector } from 'react-redux'
 
-import { MEALS } from '../data/meals-data';
-import { CATEGORIES } from '../data/categories-data';
-import MealGridTile from '../components/MealGridTile';
-
-const renderMeal = (meal, navigation) => {
-  const category = CATEGORIES.find(category => category.id === meal.categoryIds[0]);
-  
-  return(
-    <MealGridTile 
-      meal={meal}
-      category={category}
-      onSelect={() => {
-        navigation.navigate('MealDetail', {
-          mealId: meal.id,
-          categoryId: category.id
-        })             
-      }}
-    />
-  );
-}
+import RenderMealItem from '../components/RenderMealItem';
 
 const FavoritesScreen = props => {
+  const favoriteMeals = useSelector(state => state.meals);
+  const availableMeals = useSelector(state => state.meals.favoriteMeals);
+
   return (
     <FlatList 
       numColumns={1} 
-      data={MEALS} 
+      data={availableMeals} 
       renderItem={
-        ({ item }) => renderMeal(item, props.navigation)
+        ({ item }) => <RenderMealItem item={item} navigation={props.navigation} />
       }
     />
   );

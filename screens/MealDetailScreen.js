@@ -1,31 +1,41 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, Button, Image, ScrollView } from 'react-native';
+import React, { useCallback, useEffect, useState } from 'react';
+import { View, Text, Image, ScrollView } from 'react-native';
 import { Icon } from 'react-native-elements';
 import Styles from '../constants/Styles';
 import Unorderedlist from 'react-native-unordered-list';
-
-import { MEALS } from '../data/meals-data';
-import { CATEGORIES } from '../data/categories-data';
+import { useSelector, useDispatch } from 'react-redux'
+import { toggleFavorite } from '../store/actions/meals';
 
 const MealDetailScreen = props => {
-  const { categoryId, mealId } = props.route.params;
-  const meal = MEALS.find(meal => meal.id === mealId);
+  const { mealId } = props.route.params;
+
+  const allMeals = useSelector(state => state.meals.meals);
+  const allFavorites = useSelector(state => state.meals.favoriteMeals);
+
+  const meal = allMeals.find(meal => meal.id === mealId);
+  const favoriteMeal = allFavorites.find(meal => meal.id === mealId);
 
   const image = { uri: meal.imageUrl };
-  const [isHeart, setIsHeart] = useState(false);
+
+  const dispatch = useDispatch();
+  const toggleFavoriteHandler = useCallback(() => {
+    dispatch(
+      toggleFavorite(mealId)
+    );
+  }, [dispatch, mealId]);
 
   useEffect(() => {
     props.navigation.setOptions({ 
       title: meal.title,
       headerRight: () => (
         <Icon
-          name={isHeart===true ? 'heart' : 'heart-outline'}
+          name={(typeof favoriteMeal !== "undefined")==true ? 'heart' : 'heart-outline'}
           type='ionicon'
-          onPress={() => setIsHeart(!isHeart)}
+          onPress={toggleFavoriteHandler}
         />
       ),      
     });
-  }, [meal, isHeart]);
+  }, [meal, favoriteMeal, toggleFavoriteHandler]);
 
   return (
     <ScrollView>
@@ -61,10 +71,6 @@ const MealDetailScreen = props => {
             </View>
           )}
         </View>
-
-        <Button title="Go back all the way to Categories" onPress={() => {
-          props.navigation.popToTop();
-        }} />  
       </View>
     </ScrollView>
 
