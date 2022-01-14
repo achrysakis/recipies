@@ -13,7 +13,7 @@ const Styles = StyleSheet.create({
     backgroundColor: Colors.backgrounds.primary,
     paddingHorizontal: 30,
     paddingVertical: 3,
-    borderRadius: 5
+    borderRadius: 5,
   },
   flex: {
     flex: 1,
@@ -151,7 +151,7 @@ const Styles = StyleSheet.create({
     marginBottom: 20,
     width: "100%",
     maxWidth: 250,
-    alignContent: "center"
+    alignContent: "center",
     
   },
   filterLabel: {

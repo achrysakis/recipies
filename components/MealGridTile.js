@@ -14,6 +14,8 @@ const MealGridTile = props => {
   return (
     <View style={Styles.mealGridItemContainer}>
       <TouchableComponent 
+        accessibilityRole="link"
+        activeOpacity={0.5}
         style={Styles.flex}
         onPress={props.onSelect}
       >
@@ -27,18 +29,19 @@ const MealGridTile = props => {
           </View>          
         </ImageBackground>
 
+        <View style={Styles.mealGridInfoContainer}>
+          <Text style={Styles.mealGridInfo}>
+            {props.meal.affordability}
+          </Text>
+          <Text style={Styles.mealGridInfo}>
+            {props.meal.complexity}
+          </Text>
+          <Text style={Styles.mealGridInfo}>
+            {props.meal.duration} mins
+          </Text>
+        </View>     
       </TouchableComponent>   
-      <View style={Styles.mealGridInfoContainer}>
-        <Text style={Styles.mealGridInfo}>
-          {props.meal.affordability}
-        </Text>
-        <Text style={Styles.mealGridInfo}>
-          {props.meal.complexity}
-        </Text>
-        <Text style={Styles.mealGridInfo}>
-          {props.meal.duration} mins
-        </Text>
-      </View>          
+
     </View>
   );
 };

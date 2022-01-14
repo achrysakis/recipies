@@ -10,10 +10,9 @@ const MealDetailScreen = props => {
   const { mealId } = props.route.params;
 
   const allMeals = useSelector(state => state.meals.meals);
-  const allFavorites = useSelector(state => state.meals.favoriteMeals);
+  const isFavorite = useSelector(state => state.meals.favoriteMeals.some(meal => meal.id === mealId));
 
   const meal = allMeals.find(meal => meal.id === mealId);
-  const favoriteMeal = allFavorites.find(meal => meal.id === mealId);
 
   const image = { uri: meal.imageUrl };
 
@@ -29,13 +28,13 @@ const MealDetailScreen = props => {
       title: meal.title,
       headerRight: () => (
         <Icon
-          name={(typeof favoriteMeal !== "undefined")==true ? 'heart' : 'heart-outline'}
+          name={isFavorite ? 'heart' : 'heart-outline'}
           type='ionicon'
           onPress={toggleFavoriteHandler}
         />
       ),      
     });
-  }, [meal, favoriteMeal, toggleFavoriteHandler]);
+  }, [meal, isFavorite, toggleFavoriteHandler]);
 
   return (
     <ScrollView>

@@ -14,6 +14,8 @@ const CategoryGridTile = props => {
   return (
     <View style={Styles.categoryGridItemContainer}>
       <TouchableComponent 
+        accessibilityRole="link"
+        activeOpacity={0.5}      
         style={Styles.flex}
         onPress={props.onSelect}
       >

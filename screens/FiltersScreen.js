@@ -1,8 +1,11 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { View, Text, Switch } from 'react-native';
+import { View, Text, Switch, Button } from 'react-native';
+import { useDispatch } from 'react-redux';
 
 import Styles from '../constants/Styles';
 import Colors from '../constants/Colors';
+import { setMealFilters } from '../store/actions/meals'
+
 
 const FilterSwitch = props => {
   return (
@@ -24,19 +27,29 @@ const FiltersScreen = props => {
   const [isVegan, setIsVegan] = useState(false);
   const [isVegetarian, setIsVegetarian] = useState(false);
   const [isLactoseFree, setIsLactoseFree] = useState(false);
+  const dispatch = useDispatch();
 
   const saveFilters = useCallback(() => {
-    return ({
+    const appliedFilters = {
       glutenFree: isGlutenFree,
       vegan: isVegan,
       vegetarian: isVegetarian,
-      lactosefree: isLactoseFree
-    })
-  }, [isGlutenFree, isLactoseFree, isVegetarian, isVegan]);
+      lactoseFree: isLactoseFree
+    };
+
+    dispatch(setMealFilters(appliedFilters));
+  }, [isGlutenFree, isLactoseFree, isVegetarian, isVegan, dispatch]);
+  
 
   useEffect(() => {
-    navigation.setParams({ save: saveFilters()});
+    navigation.setParams({ 
+      save: saveFilters()
+    });
   }, [saveFilters]);  
+
+  const redirect = () => {
+    props.navigation.navigate('Categories')       
+  }
 
   return (
     <View style={Styles.screen}>
@@ -46,6 +59,9 @@ const FiltersScreen = props => {
       <FilterSwitch title="Vegan" value={isVegan} valueChange={setIsVegan} />
       <FilterSwitch title="Vegerarian" value={isVegetarian} valueChange={setIsVegetarian} />
       <FilterSwitch title="Lactose-free" value={isLactoseFree} valueChange={setIsLactoseFree} />
+      <View style={Styles.button}>
+        <Button color="#fff" title="Save" onPress={redirect} />
+      </View>
     </View>
   );
 };

@@ -5,13 +5,12 @@ import { useSelector } from 'react-redux'
 import RenderMealItem from '../components/RenderMealItem';
 
 const FavoritesScreen = props => {
-  const favoriteMeals = useSelector(state => state.meals);
-  const availableMeals = useSelector(state => state.meals.favoriteMeals);
+  const favoriteMeals = useSelector(state => state.meals.favoriteMeals);
 
   return (
     <FlatList 
       numColumns={1} 
-      data={availableMeals} 
+      data={favoriteMeals} 
       renderItem={
         ({ item }) => <RenderMealItem item={item} navigation={props.navigation} />
       }

@@ -8,9 +8,11 @@ import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux';
 
 import mealsReducer from './store/reducers/meals';
+import categoriesReducer from './store/reducers/categories';
 
 const rootReducer = combineReducers({
-  meals: mealsReducer
+  meals: mealsReducer,
+  categories: categoriesReducer
 })
 const store = createStore(rootReducer);
 
