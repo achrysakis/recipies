@@ -1,25 +1,11 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { View, Text, Switch, Button } from 'react-native';
+import ValueSlider from '../components/ValueSlider';
 import { useDispatch } from 'react-redux';
 
 import Styles from '../constants/Styles';
-import Colors from '../constants/Colors';
 import { setMealFilters } from '../store/actions/meals'
-
-
-const FilterSwitch = props => {
-  return (
-    <View style={Styles.filterContainer}>
-      <Text style={Styles.filterLabel}>{props.title}</Text>
-      <Switch 
-        style={Styles.filterSwitch} 
-        trackColor={{ true: Colors.backgrounds.primary }}
-        onValueChange={newValue => props.valueChange(newValue)}
-        value={props.value}          
-      />
-    </View>    
-  )
-}
+import FilterSwitch from '../components/FilterSwitch';
 
 const FiltersScreen = props => {
   const { navigation } = props;
@@ -27,6 +13,7 @@ const FiltersScreen = props => {
   const [isVegan, setIsVegan] = useState(false);
   const [isVegetarian, setIsVegetarian] = useState(false);
   const [isLactoseFree, setIsLactoseFree] = useState(false);
+  const [duration, setDuration] = useState(300)
   const dispatch = useDispatch();
 
   const saveFilters = useCallback(() => {
@@ -34,31 +21,29 @@ const FiltersScreen = props => {
       glutenFree: isGlutenFree,
       vegan: isVegan,
       vegetarian: isVegetarian,
-      lactoseFree: isLactoseFree
+      lactoseFree: isLactoseFree,
+      duration: duration
     };
-
+    navigation.setParams({ 
+      save: appliedFilters
+    });
     dispatch(setMealFilters(appliedFilters));
-  }, [isGlutenFree, isLactoseFree, isVegetarian, isVegan, dispatch]);
+  }, [isGlutenFree, isLactoseFree, isVegetarian, isVegan, duration, navigation, dispatch]);
   
 
-  useEffect(() => {
-    navigation.setParams({ 
-      save: saveFilters()
-    });
-  }, [saveFilters]);  
-
   const redirect = () => {
-    props.navigation.navigate('Categories')       
+    saveFilters();
+    props.navigation.navigate('Categories');  
   }
 
   return (
     <View style={Styles.screen}>
-      <Text>{}</Text>
       <Text style={{...Styles.h1,...Styles.textCenter}}>Filters / Preferences</Text>
       <FilterSwitch title="Gluten-free" value={isGlutenFree} valueChange={setIsGlutenFree} />
       <FilterSwitch title="Vegan" value={isVegan} valueChange={setIsVegan} />
       <FilterSwitch title="Vegerarian" value={isVegetarian} valueChange={setIsVegetarian} />
       <FilterSwitch title="Lactose-free" value={isLactoseFree} valueChange={setIsLactoseFree} />
+      <ValueSlider value={duration} label="Maximum duration (mins)" step={10} max={300} min={10} valueChange={setDuration} />
       <View style={Styles.button}>
         <Button color="#fff" title="Save" onPress={redirect} />
       </View>

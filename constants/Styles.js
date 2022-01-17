@@ -149,8 +149,9 @@ const Styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     marginBottom: 20,
+    alignContent: 'center',
+    textAlign: 'center',
     width: "100%",
-    maxWidth: 250,
     alignContent: "center",
     
   },
